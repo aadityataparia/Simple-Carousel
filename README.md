@@ -2,7 +2,7 @@
 Simple carousel in pure vanilla javascript/web component/SF-component
 
 ## Features
-- In vanilla JS
+- In vanilla JS (ES6)
 - Horzontally and Vertically Center aligned images which are fit into container
 - Arrows to navigate through images
 - Number representing total number of images and index of current image
