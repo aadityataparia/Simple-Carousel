@@ -10,6 +10,6 @@ Simple carousel in pure vanilla javascript/web component/SF-component
 - Photo changing animation
 
 ## Example
-Go to: https://www.aadityataparia.com/carousel/
+Go to: https://www.aadityataparia.com/carousel/Vanilla-Javascript/
 
 ![eg](https://raw.githubusercontent.com/aadityataparia/Simple-Carousel/master/example.png)
