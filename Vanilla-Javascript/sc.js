@@ -173,18 +173,18 @@ var SC = {
       ra.style.display = "none";
       la.style.display = "none";
     }
-    var aI = 0;
-    var l = cards.length;
+    let aI = 0;
+    let l = cards.length;
     if (SC.cors.indexOf(main) > -1) {
       SC.corsl[SC.cors.indexOf(main)] = l;
-      var index = SC.cors.indexOf(main);
+      let index = SC.cors.indexOf(main);
       SC.corscards[index] = cards;
       makeActive(aI, index);
       return;
     } else {
-      var k = SC.cors.push(main);
+      let k = SC.cors.push(main);
       SC.corsl[SC.cors.indexOf(main)] = l;
-      var index = SC.cors.indexOf(main);
+      let index = SC.cors.indexOf(main);
       SC.corscards[index] = cards;
     }
     SC.makeActive(aI, index);
@@ -207,7 +207,7 @@ var SC = {
       }, ELopt);
     }
     if (fs) {
-      var fsenabled = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullscreenElement || document.msFullscreenElement;
+      let fsenabled = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullscreenElement || document.msFullscreenElement;
       if (typeof fsenabled === 'undefined') {
         fs.style.display = 'none';
       } else {
