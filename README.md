@@ -11,4 +11,5 @@ Simple carousel in pure vanilla javascript/web component/SF-component
 
 ## Example
 Go to: https://www.aadityataparia.com/carousel/
-![eg])(https://raw.githubusercontent.com/aadityataparia/Simple-Carousel/master/example.png)
+
+![eg](https://raw.githubusercontent.com/aadityataparia/Simple-Carousel/master/example.png)
