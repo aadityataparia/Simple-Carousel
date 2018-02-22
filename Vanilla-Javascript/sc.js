@@ -21,7 +21,7 @@ function forEach(array, callback) {
   if (typeof array == 'object' && array != null && array) {
     for (let key in array) {
       if (array.hasOwnProperty(key) && array[key] && key != "length") {
-        callback.call(array[i], array[key], key);
+        callback.call(array[key], array[key], key);
       }
     }
   } else if(Array.isArray(array)) {
