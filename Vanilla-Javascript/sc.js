@@ -177,14 +177,14 @@ var SC = {
     let l = cards.length;
     if (SC.cors.indexOf(main) > -1) {
       SC.corsl[SC.cors.indexOf(main)] = l;
-      let index = SC.cors.indexOf(main);
+      var index = SC.cors.indexOf(main);
       SC.corscards[index] = cards;
       makeActive(aI, index);
       return;
     } else {
       let k = SC.cors.push(main);
       SC.corsl[SC.cors.indexOf(main)] = l;
-      let index = SC.cors.indexOf(main);
+      var index = SC.cors.indexOf(main);
       SC.corscards[index] = cards;
     }
     SC.makeActive(aI, index);
@@ -207,7 +207,10 @@ var SC = {
       }, ELopt);
     }
     if (fs) {
-      let fsenabled = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullscreenElement || document.msFullscreenElement;
+      let fsenabled = document.fullscreenEnabled ||
+                    	document.webkitFullscreenEnabled ||
+                    	document.mozFullScreenEnabled ||
+                    	document.msFullscreenEnabled;
       if (typeof fsenabled === 'undefined') {
         fs.style.display = 'none';
       } else {
