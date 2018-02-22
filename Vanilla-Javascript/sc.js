@@ -1,9 +1,7 @@
-var cors = [],
-  corsl = [],
-  corscards = [];;
+// Polyfills
 var SUPPORT_PASSIVE = false;
 try {
-  var opts = Object.defineProperty({}, 'passive', {
+var opts = Object.defineProperty({}, 'passive', {
     get: function() {
       SUPPORT_PASSIVE = true;
     }
@@ -15,11 +13,10 @@ if (SUPPORT_PASSIVE) {
   var ELopt = {
     passive: true,
     capture: false
-  };
+  }
 } else {
-  var ELopt = false;
+var ELopt = false;
 }
-// Polyfills
 function forEach(array, callback) {
   if (typeof array == 'object' && array != null && array) {
     for (var key in array) {
@@ -161,77 +158,90 @@ function toggleFullScreen(element) {
     }
   }
 }
-
-function makeCorousel(main, cardC, rightC, leftC, fsC) {
-  activeC = "active";
-  cardC = typeof cardC !== 'undefined' ? cardC : "img";
-  rightC = typeof rightC !== 'undefined' ? rightC : ".r";
-  leftC = typeof leftC !== 'undefined' ? leftC : ".l";
-  fsC = typeof fsC !== 'undefined' ? fsC : ".fs";
-  var cards = main.querySelectorAll(".scrollD img");
-  var ra = main.querySelector(rightC);
-  var la = main.querySelector(leftC);
-  var fs = main.querySelector(fsC);
-  var num = main.querySelector(".num");
-  if (cards.length < 2 && ra && la) {
-    ra.style.display = "none";
-    la.style.display = "none";
-  }
-  var aI = 0;
-  var l = cards.length;
-  if (cors.indexOf(main) > -1) {
-    corsl[cors.indexOf(main)] = l;
-    var index = cors.indexOf(main);
-    corscards[index] = cards;
-    makeActive(aI, index);
-    return;
-  } else {
-    var k = cors.push(main);
-    corsl[cors.indexOf(main)] = l;
-    var index = cors.indexOf(main);
-    corscards[index] = cards;
-  }
-  makeActive(aI, index);
-  if (ra) {
-    ra.addEventListener('click', function() {
-      l = corsl[index];
-      aI++;
-      aI = aI % l;
+var SC = {
+  new: function(main) {
+    let cardC = "img";
+    let rightC = ".r";
+    let leftC = ".l";
+    let fsC = ".fs";
+    let cards = main.querySelectorAll(".scrollD img");
+    let ra = main.querySelector(rightC);
+    let la = main.querySelector(leftC);
+    let fs = main.querySelector(fsC);
+    let num = main.querySelector(".num");
+    if (cards.length < 2 && ra && la) {
+      ra.style.display = "none";
+      la.style.display = "none";
+    }
+    var aI = 0;
+    var l = cards.length;
+    if (SC.cors.indexOf(main) > -1) {
+      SC.corsl[SC.cors.indexOf(main)] = l;
+      var index = SC.cors.indexOf(main);
+      SC.corscards[index] = cards;
       makeActive(aI, index);
-    }, ELopt);
-  }
-  if (la) {
-    la.addEventListener('click', function() {
-      l = corsl[cors.indexOf(main)];
-      aI--;
-      if (aI < 0) {
-        aI = aI + l;
+      return;
+    } else {
+      var k = SC.cors.push(main);
+      SC.corsl[SC.cors.indexOf(main)] = l;
+      var index = SC.cors.indexOf(main);
+      SC.corscards[index] = cards;
+    }
+    SC.makeActive(aI, index);
+    if (ra) {
+      ra.addEventListener('click', function() {
+        l = SC.corsl[index];
+        aI++;
+        aI = aI % l;
+        SC.makeActive(aI, index);
+      }, ELopt);
+    }
+    if (la) {
+      la.addEventListener('click', function() {
+        l = SC.corsl[SC.cors.indexOf(main)];
+        aI--;
+        if (aI < 0) {
+          aI = aI + l;
+        }
+        SC.makeActive(aI, index);
+      }, ELopt);
+    }
+    if (fs) {
+      var fsenabled = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullscreenElement || document.msFullscreenElement;
+      if (typeof fsenabled === 'undefined') {
+        fs.style.display = 'none';
+      } else {
+        fs.addEventListener('click', function() {
+          toggleFullScreen(main);
+        }, ELopt);
       }
-      makeActive(aI, index);
-    }, ELopt);
-  }
-  if (fs) {
-    fs.addEventListener('click', function() {
-      toggleFullScreen(main);
-    }, ELopt);
-  }
-
-  function makeActive(i, j) {
-    removeExceptOne(corscards[j], activeC, i);
-    i = i == 0 ? i + l : i;
-    removeExceptOne(corscards[j], "prev", i - 1);
-    i = i == l ? i - l : i;
-    removeExceptOne(corscards[j], "next", i + 1);
-    if (corscards[j][i] && !corscards[j][i].getAttribute("src")) {
-      corscards[j][i].setAttribute("src", corscards[j][i].getAttribute("data-src"));
     }
     if (num) {
-      num.innerHTML = i + 1 + " of " + corscards[j].length;
+      num.innerHTML = 1 + " of " + l;
+      SC.num[index] = num;
     }
-  }
+  },
+  makeActive: function(i, j) {
+    let l = SC.corscards[j].length;
+    removeExceptOne(SC.corscards[j], "active", i);
+    i = i == 0 ? i + l : i;
+    removeExceptOne(SC.corscards[j], "prev", i - 1);
+    i = i == l ? i - l : i;
+    removeExceptOne(SC.corscards[j], "next", i + 1);
+    if (SC.corscards[j][i] && !SC.corscards[j][i].getAttribute("src")) {
+      SC.corscards[j][i].setAttribute("src", SC.corscards[j][i].getAttribute("data-src"));
+    }
+    if (SC.num[j]) {
+      SC.num[j].innerHTML = i + 1 + " of " + l;
+    }
+  },
+  cors: [],
+  corsl: [],
+  corscards: [],
+  num: []
 }
 
 // create carousel for all .cor
 forEach(document.querySelectorAll('.cor'), function(e){
-  makeCorousel(e);
+  SC.new(e);
 });
