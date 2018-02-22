@@ -169,7 +169,6 @@ function makeCorousel(main, cardC, rightC, leftC, fsC) {
   leftC = typeof leftC !== 'undefined' ? leftC : ".l";
   fsC = typeof fsC !== 'undefined' ? fsC : ".fs";
   var cards = main.querySelectorAll(".scrollD img");
-  console.log(cards);
   var ra = main.querySelector(rightC);
   var la = main.querySelector(leftC);
   var fs = main.querySelector(fsC);
