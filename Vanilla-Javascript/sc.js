@@ -1,7 +1,7 @@
 // Polyfills
 var SUPPORT_PASSIVE = false;
 try {
-var opts = Object.defineProperty({}, 'passive', {
+  let opts = Object.defineProperty({}, 'passive', {
     get: function() {
       SUPPORT_PASSIVE = true;
     }
@@ -19,7 +19,7 @@ var ELopt = false;
 }
 function forEach(array, callback) {
   if (typeof array == 'object' && array != null && array) {
-    for (var key in array) {
+    for (let key in array) {
       if (array.hasOwnProperty(key) && array[key] && key != "length") {
         callback.call(array[i], array[key], key);
       }
@@ -28,7 +28,7 @@ function forEach(array, callback) {
     if (array.length < 1) {
       return false;
     }
-    for (var i = 0; i < array.length; i++) {
+    for (let i = 0; i < array.length; i++) {
       callback.call(array[i], array[i], i);
     }
   } else {
@@ -36,8 +36,8 @@ function forEach(array, callback) {
   }
 };
 function siblings(elem, classN) {
-  var r = [];
-  var childs = children(elem.parentElement, '*');
+  let r = [];
+  let childs = children(elem.parentElement, '*');
   forEach(childs, function(child) {
     if (child.matches(classN)) {
       r.push(child);
@@ -57,12 +57,12 @@ function parent(x, k) {
 }
 
 function children(elem, classN) {
-  var c = elem.children;
-  var r = [];
+  let c = elem.children;
+  let r = [];
   if (!c) {
     return false;
   }
-  for (var i = 0; i < c.length; i++) {
+  for (let i = 0; i < c.length; i++) {
     if (c[i].matches(classN)) {
       r.push(c[i]);
     }
@@ -77,7 +77,7 @@ function hasClass(elem, classN) {
   if (!elem) {
     return false;
   }
-  var classes = elem.className.split(" ");
+  let classes = elem.className.split(" ");
   return classes.indexOf(classN) > -1;
 }
 
@@ -91,7 +91,7 @@ function addClass(elem, classN) {
   if (elem.className.length < 1) {
     elem.className = classN;
   }
-  var classes = elem.className.split(" ");
+  let classes = elem.className.split(" ");
   if (classes.indexOf(classN) < 0) {
     classes.push(classN);
   }
@@ -105,13 +105,13 @@ function removeClass(elem, classN) {
   if (!elem) {
     return false;
   }
-  var classes = elem.className.split(" ");
+  let classes = elem.className.split(" ");
   classes.remove(classN);
   elem.className = classes.join(" ");
 }
 
 Array.prototype.remove = function() {
-  var what, a = arguments,
+  let what, a = arguments,
     L = a.length,
     ax;
   while (L && this.length) {
@@ -124,7 +124,7 @@ Array.prototype.remove = function() {
 };
 
 function removeExceptOne(elems, classN, index) {
-  for (var j = 0; j < elems.length; j++) {
+  for (let j = 0; j < elems.length; j++) {
     if (j !== index) {
       removeClass(elems[j], classN);
     } else {
@@ -135,26 +135,16 @@ function removeExceptOne(elems, classN, index) {
 
 // carousel js
 function toggleFullScreen(element) {
-  var fsenabled = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullscreenElement || document.msFullscreenElement;
+  let fsenabled = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullscreenElement || document.msFullscreenElement;
   if (fsenabled) {
-    var requestMethod = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
+    let requestMethod = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
     if (requestMethod) {
       requestMethod.call(document);
-    } else if (typeof window.ActiveXObject !== "undefined") {
-      var wscript = new ActiveXObject("WScript.Shell");
-      if (wscript !== null) {
-        wscript.SendKeys("{ESC}");
-      }
     }
   } else {
-    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+    let requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
     if (requestMethod) {
       requestMethod.call(element);
-    } else if (typeof window.ActiveXObject !== "undefined") {
-      var wscript = new ActiveXObject("WScript.Shell");
-      if (wscript !== null) {
-        wscript.SendKeys("{F11}");
-      }
     }
   }
 }
