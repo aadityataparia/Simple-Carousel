@@ -1,7 +1,7 @@
 <template relative-url="true">
   <link type="text/css" rel="stylesheet" href="./cor.min.css">
   <div class="cor">
-    <img class="percent" style="position: absolute" src="./loading.gif" alt="loading">
+    <img class="loading" style="position: absolute; display: #{bind.loading.style.display}" src="./loading.gif" alt="loading">
     <slot class="scrollD"></slot>
     <div class="arrow l noselect">
       <img src="./down.svg" class="fit" alt="\/"/>
@@ -19,6 +19,13 @@
 </template>
 <script src="../Vanilla-Javascript/sc.js" charset="utf-8"></script>
 <script>
+  SF.defaultBind['simple-carousel'] = {
+    'loading': {
+      'style': {
+        'display': 'block'
+      }
+    }
+  }
   SF.connectedCallback["simple-carousel"] = function(e) {}
   SF.bindDataChangedCallback["simple-carousel"] = function(e) {
     let cards = e.shadowRoot.querySelectorAll("slot")[0].assignedNodes().filter(el => typeof el.tagName !== "undefined");
