@@ -26,12 +26,8 @@
     let la = e.shadowRoot.querySelector(".la");
     let fs = e.shadowRoot.querySelector(".fs");
     let num = e.shadowRoot.querySelector(".num");
-    SC.new(e, {
-      "cards": cards,
-      "ra": ra,
-      "la": la,
-      "fs": fs,
-      "num": num
+    SC.new(e.shadowRoot, {
+      "cards": cards
     });
   }
 </script>
