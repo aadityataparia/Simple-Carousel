@@ -148,6 +148,14 @@ function toggleFullScreen(element) {
     }
   }
 }
+function toggleFullScreen(element) {
+  let fsenabled = hasClass(element, "fullscreen");
+  if (fsenabled) {
+    removeClass(element, "fullscreen");
+  } else {
+    addClass(element, "fullscreen");
+  }
+}
 var SC = {
   new: function(main, params) {
     params = params || {};
@@ -200,7 +208,9 @@ var SC = {
                     	document.mozFullScreenEnabled ||
                     	document.msFullscreenEnabled;
       if (typeof fsenabled === 'undefined') {
-        fs.style.display = 'none';
+        fs.addEventListener('click', function() {
+          toggleFullScreenClass(main);
+        }, ELopt);
       } else {
         fs.addEventListener('click', function() {
           toggleFullScreen(main);
