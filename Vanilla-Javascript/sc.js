@@ -134,20 +134,6 @@ function removeExceptOne(elems, classN, index) {
 }
 
 // carousel js
-function toggleFullScreen(element) {
-  let fsenabled = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullscreenElement || document.msFullscreenElement;
-  if (fsenabled) {
-    let requestMethod = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
-    if (requestMethod) {
-      requestMethod.call(document);
-    }
-  } else {
-    let requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
-    if (requestMethod) {
-      requestMethod.call(element);
-    }
-  }
-}
 function toggleFullScreenClass(element) {
   let fsenabled = hasClass(element, "fullscreen");
   if (fsenabled) {
@@ -203,19 +189,9 @@ var SC = {
       SC.la[index] = la;
     }
     if (fs) {
-      let fsenabled = document.fullscreenEnabled ||
-                    	document.webkitFullscreenEnabled ||
-                    	document.mozFullScreenEnabled ||
-                    	document.msFullscreenEnabled;
-      if (typeof fsenabled === 'undefined') {
-        fs.addEventListener('click', function() {
-          toggleFullScreenClass(main);
-        }, ELopt);
-      } else {
-        fs.addEventListener('click', function() {
-          toggleFullScreen(main);
-        }, ELopt);
-      }
+      fs.addEventListener('click', function() {
+        toggleFullScreenClass(main);
+      }, ELopt);
       SC.fs[index] = fs;
     }
     if (num) {
