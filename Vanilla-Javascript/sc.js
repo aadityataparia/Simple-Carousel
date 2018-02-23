@@ -148,7 +148,7 @@ function toggleFullScreen(element) {
     }
   }
 }
-function toggleFullScreen(element) {
+function toggleFullScreenClass(element) {
   let fsenabled = hasClass(element, "fullscreen");
   if (fsenabled) {
     removeClass(element, "fullscreen");
