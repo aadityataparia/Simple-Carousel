@@ -234,6 +234,6 @@ var SC = {
   ra: [],
   la: [],
   fs: [],
-  SC.aI[index]: [],
+  aI: [],
   num: []
 }
