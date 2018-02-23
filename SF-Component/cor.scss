@@ -105,7 +105,7 @@ $custom-easing: ease;
   position: relative;
 }
 
-*::slotted(img) {
+*::slotted(*) {
   z-index: 0;
   position: absolute;
   top: 50%;
@@ -119,15 +119,15 @@ $custom-easing: ease;
   transition: transform 0.15s $custom-easing, opacity 0.15s $custom-easing;
 }
 
-*::slotted(img.prev) {
+*::slotted(*.prev) {
   transform: translate3d(-60%, -50%, 0);
 }
 
-*::slotted(img.next) {
+*::slotted(*.next) {
   transform: translate3d(-40%, -50%, 0);
 }
 
-*::slotted(img.active) {
+*::slotted(*.active) {
   display: block;
   opacity: 1;
 }
