@@ -151,6 +151,11 @@ var SC = {
     let la = params.la || main.querySelector(".l");
     let fs = params.fs || main.querySelector(".fs");
     let num = params.num || main.querySelector(".num");
+    let loading = main.querySelector(".loading");
+    let load = typeof params.showLoading === 'undefined' ? true : params.showLoading;
+    if (!load){
+      loading.style.display = "none";
+    }
     if (cards.length < 2 && ra && la) {
       ra.style.display = "none";
       la.style.display = "none";
