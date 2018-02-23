@@ -21,6 +21,9 @@
 <script>
   SF.connectedCallback["simple-carousel"] = function(e) {}
   SF.bindDataChangedCallback["simple-carousel"] = function(e) {
-    SC.new(e.shadowRoot.querySelector('.cor'));
+    let cards = e.shadowRoot.querySelectorAll("slot")[0].assignedNodes().filter(el => el.tagName === "IMG");
+    SC.new(e.shadowRoot.querySelector('.cor'), {
+      "cards": cards
+    });
   }
 </script>
