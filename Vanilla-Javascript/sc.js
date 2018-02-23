@@ -160,7 +160,7 @@ var SC = {
       ra.style.display = "none";
       la.style.display = "none";
     }
-    let aI = 0;
+    var aI = 0;
     let l = cards.length;
     if (SC.cors.indexOf(main) > -1) {
       SC.corsl[SC.cors.indexOf(main)] = l;
