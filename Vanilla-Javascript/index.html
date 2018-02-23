@@ -11,13 +11,17 @@
       width: 300px;
       height: 300px;
     }
+
+    #second .scrollD p {
+      background-color: white;
+    }
   </style>
 </head>
 
 <body>
   <h2>Simple-Carousel Example</h2>
   <div class="container">
-    <div class="cor">
+    <div class="cor" id="first">
       <img class="loading" style="position: absolute" src="./loading.gif" alt="loading">
       <div class="scrollD">
         <!-- insert imgs here -->
@@ -39,7 +43,36 @@
       </div>
     </div>
   </div>
+  <div class="container">
+    <div class="cor" id="second">
+      <div class="scrollD">
+        <!-- insert imgs here -->
+        <p>One slide</p>
+        <p>Two slide</p>
+        <p>Three slide</p>
+      </div>
+      <div class="arrow l noselect">
+        <img src="./down.svg" class="fit" alt="\/" />
+      </div>
+      <div class="arrow r noselect">
+        <img src="./down.svg" class="fit" alt="\/" />
+      </div>
+      <div class="br">
+        <div class="fs right">
+          <img src="./fs.svg" alt="FS" />
+        </div>
+        <div class="num"></div>
+      </div>
+    </div>
+  </div>
   <script src="./sc.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    // create carousel for all .cor
+    SC.new(document.querySelector("#first"));
+    SC.new(document.querySelector("#second"), {
+      "cards": document.querySelectorAll('#second .scrollD p')
+    });
+  </script>
 </body>
 
 </html>

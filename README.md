@@ -8,6 +8,7 @@ Simple carousel in pure vanilla javascript/web component/SF-component
 - Number representing total number of images and index of current image
 - Full screen button
 - Photo changing animation
+- Images can be replaced with other html elements (to make slide)
 
 ## Example
 Go to: https://www.aadityataparia.com/carousel/Vanilla-Javascript/

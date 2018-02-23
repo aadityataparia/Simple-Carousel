@@ -149,12 +149,13 @@ function toggleFullScreen(element) {
   }
 }
 var SC = {
-  new: function(main) {
+  new: function(main, params) {
+    params = params || {};
     let cardC = "img";
     let rightC = ".r";
     let leftC = ".l";
     let fsC = ".fs";
-    let cards = main.querySelectorAll(".scrollD img");
+    let cards = params.cards || main.querySelectorAll(".scrollD img");
     let ra = main.querySelector(rightC);
     let la = main.querySelector(leftC);
     let fs = main.querySelector(fsC);
@@ -210,7 +211,7 @@ var SC = {
       }
     }
     if (num) {
-      num.innerHTML = 1 + " of " + l;
+      num.innerHTML = 1 + "/" + l;
       SC.num[index] = num;
     }
   },
@@ -225,7 +226,7 @@ var SC = {
       SC.corscards[j][i].setAttribute("src", SC.corscards[j][i].getAttribute("data-src"));
     }
     if (SC.num[j]) {
-      SC.num[j].innerHTML = i + 1 + " of " + l;
+      SC.num[j].innerHTML = i + 1 + "/" + l;
     }
   },
   cors: [],
@@ -233,8 +234,3 @@ var SC = {
   corscards: [],
   num: []
 }
-
-// create carousel for all .cor
-forEach(document.querySelectorAll('.cor'), function(e){
-  SC.new(e);
-});
