@@ -160,38 +160,38 @@ var SC = {
       ra.style.display = "none";
       la.style.display = "none";
     }
-    var aI = 0;
     let l = cards.length;
-    if (SC.cors.indexOf(main) > -1) {
-      SC.corsl[SC.cors.indexOf(main)] = l;
-      var index = SC.cors.indexOf(main);
+    let index = SC.cors.indexOf(main);
+    if (index > -1) {
+      SC.corsl[index] = l;
       SC.corscards[index] = cards;
-      SC.makeActive(aI, index);
+      SC.makeActive(0, index);
       return;
     } else {
       let k = SC.cors.push(main);
-      SC.corsl[SC.cors.indexOf(main)] = l;
-      var index = SC.cors.indexOf(main);
+      index = SC.cors.indexOf(main);
+      SC.corsl[index] = l;
       SC.corscards[index] = cards;
     }
-    SC.makeActive(aI, index);
+    SC.aI[index] = 0;
+    SC.makeActive(SC.aI[index], index);
     if (ra) {
       ra.addEventListener('click', function() {
         l = SC.corsl[index];
-        aI++;
-        aI = aI % l;
-        SC.makeActive(aI, index);
+        SC.aI[index]++;
+        SC.aI[index] = SC.aI[index] % l;
+        SC.makeActive(SC.aI[index], index);
       }, ELopt);
       SC.ra[index] = ra;
     }
     if (la) {
       la.addEventListener('click', function() {
         l = SC.corsl[SC.cors.indexOf(main)];
-        aI--;
-        if (aI < 0) {
-          aI = aI + l;
+        SC.aI[index]--;
+        if (SC.aI[index] < 0) {
+          SC.aI[index] = SC.aI[index] + l;
         }
-        SC.makeActive(aI, index);
+        SC.makeActive(SC.aI[index], index);
       }, ELopt);
       SC.la[index] = la;
     }
@@ -234,5 +234,6 @@ var SC = {
   ra: [],
   la: [],
   fs: [],
+  SC.aI[index]: [],
   num: []
 }
