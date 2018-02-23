@@ -170,7 +170,7 @@ var SC = {
       SC.corsl[SC.cors.indexOf(main)] = l;
       var index = SC.cors.indexOf(main);
       SC.corscards[index] = cards;
-      makeActive(aI, index);
+      SC.makeActive(aI, index);
       return;
     } else {
       let k = SC.cors.push(main);
