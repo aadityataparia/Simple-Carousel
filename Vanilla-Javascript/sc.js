@@ -151,15 +151,11 @@ function toggleFullScreen(element) {
 var SC = {
   new: function(main, params) {
     params = params || {};
-    let cardC = "img";
-    let rightC = ".r";
-    let leftC = ".l";
-    let fsC = ".fs";
     let cards = params.cards || main.querySelectorAll(".scrollD img");
-    let ra = main.querySelector(rightC);
-    let la = main.querySelector(leftC);
-    let fs = main.querySelector(fsC);
-    let num = main.querySelector(".num");
+    let ra = params.ra || main.querySelector(".r");
+    let la = params.la || main.querySelector(".l");
+    let fs = params.fs || main.querySelector(".fs");
+    let num = params.num || main.querySelector(".num");
     if (cards.length < 2 && ra && la) {
       ra.style.display = "none";
       la.style.display = "none";
