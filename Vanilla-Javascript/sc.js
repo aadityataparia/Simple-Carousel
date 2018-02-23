@@ -192,6 +192,7 @@ var SC = {
       fs.addEventListener('click', function() {
         toggleFullScreenClass(main);
       }, ELopt);
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
       SC.fs[index] = fs;
     }
     if (num) {
