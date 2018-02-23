@@ -166,7 +166,6 @@ var SC = {
       SC.corsl[index] = l;
       SC.corscards[index] = cards;
       SC.makeActive(0, index);
-      return;
     } else {
       let k = SC.cors.push(main);
       index = SC.cors.indexOf(main);
