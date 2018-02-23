@@ -182,6 +182,7 @@ var SC = {
         aI = aI % l;
         SC.makeActive(aI, index);
       }, ELopt);
+      SC.ra[index] = ra;
     }
     if (la) {
       la.addEventListener('click', function() {
@@ -192,6 +193,7 @@ var SC = {
         }
         SC.makeActive(aI, index);
       }, ELopt);
+      SC.la[index] = la;
     }
     if (fs) {
       let fsenabled = document.fullscreenEnabled ||
@@ -205,6 +207,7 @@ var SC = {
           toggleFullScreen(main);
         }, ELopt);
       }
+      SC.fs[index] = fs;
     }
     if (num) {
       num.innerHTML = 1 + "/" + l;
@@ -228,5 +231,8 @@ var SC = {
   cors: [],
   corsl: [],
   corscards: [],
+  ra: [],
+  la: [],
+  fs: [],
   num: []
 }
