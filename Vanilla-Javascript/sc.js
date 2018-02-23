@@ -141,6 +141,7 @@ function toggleFullScreenClass(element) {
   } else {
     addClass(element, "fullscreen");
   }
+  document.body.scrollTop = document.documentElement.scrollTop = 0;
 }
 var SC = {
   new: function(main, params) {
@@ -192,7 +193,6 @@ var SC = {
       fs.addEventListener('click', function() {
         toggleFullScreenClass(main);
       }, ELopt);
-      document.body.scrollTop = document.documentElement.scrollTop = 0;
       SC.fs[index] = fs;
     }
     if (num) {
