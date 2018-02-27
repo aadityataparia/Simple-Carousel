@@ -1,4 +1,8 @@
 /*Corousel CSS*/
+body.noscroll {
+  overflow: hidden !important;
+}
+
 .cor {
   position: relative;
   width: 100%;

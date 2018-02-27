@@ -138,8 +138,10 @@ function toggleFullScreenClass(element) {
   let fsenabled = hasClass(element, "fullscreen");
   if (fsenabled) {
     removeClass(element, "fullscreen");
+    removeClass(document.body, "noscroll");
   } else {
     addClass(element, "fullscreen");
+    addClass(document.body, "noscroll");
   }
   document.body.scrollTop = document.documentElement.scrollTop = 0;
 }
