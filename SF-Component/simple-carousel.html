@@ -19,15 +19,16 @@
 </template>
 <script src="../Vanilla-Javascript/sc.js" charset="utf-8"></script>
 <script>
-  SF.defaultBind['simple-carousel'] = {
+  let c = SFComponent['simple-carousel'];
+  c.defaultBind = {
     'loading': {
       'style': {
         'display': 'block'
       }
     }
   }
-  SF.connectedCallback["simple-carousel"] = function(e) {}
-  SF.bindDataChangedCallback["simple-carousel"] = function(e) {
+  c.connectedCallback = function(e) {}
+  c.bindDataChangedCallback = function(e) {
     let cards = e.shadowRoot.querySelectorAll("slot")[0].assignedNodes().filter(el => typeof el.tagName !== "undefined");
     SC.new(e.shadowRoot.querySelector('.cor'), {
       "cards": cards
