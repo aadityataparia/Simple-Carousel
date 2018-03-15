@@ -27,9 +27,7 @@
       }
     }
   }
-  console.log(simpleCarousel);
   simpleCarousel.connectedCallback = function(e) {
-    console.log(e);
     let cards = e.shadowRoot.querySelectorAll("slot")[0].assignedNodes().filter(el => typeof el.tagName !== "undefined");
     SC.new(e.shadowRoot.querySelector('.cor'), {
       "cards": cards
