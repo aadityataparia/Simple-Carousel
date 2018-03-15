@@ -77,8 +77,7 @@ function hasClass(elem, classN) {
   if (!elem) {
     return false;
   }
-  let classes = elem.className.split(" ");
-  return classes.indexOf(classN) > -1;
+  return elem.classList.contains(classN);
 }
 
 function addClass(elem, classN) {
@@ -91,11 +90,7 @@ function addClass(elem, classN) {
   if (elem.className.length < 1) {
     elem.className = classN;
   }
-  let classes = elem.className.split(" ");
-  if (classes.indexOf(classN) < 0) {
-    classes.push(classN);
-  }
-  elem.className = classes.join(" ");
+  elem.classList.add(classN);
 }
 
 function removeClass(elem, classN) {
@@ -105,9 +100,7 @@ function removeClass(elem, classN) {
   if (!elem) {
     return false;
   }
-  let classes = elem.className.split(" ");
-  classes.remove(classN);
-  elem.className = classes.join(" ");
+  elem.classList.remove(classN);
 }
 
 Array.prototype.remove = function() {
