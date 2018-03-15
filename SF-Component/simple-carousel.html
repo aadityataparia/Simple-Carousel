@@ -1,7 +1,7 @@
 <template relative-url="true">
   <link type="text/css" rel="stylesheet" href="../SF-Component/cor.min.css">
   <div class="cor">
-    <img class="loading" style="position: absolute; display: #{bind.loading.style.display}" src="./loading.gif" alt="loading">
+    <img class="loading" style="position: absolute; display: ${bind.loading.style.display}" src="./loading.gif" alt="loading">
     <slot class="scrollD"></slot>
     <div class="arrow l noselect">
       <img src="./down.svg" class="fit" alt="\/"/>
@@ -19,16 +19,17 @@
 </template>
 <script src="../Vanilla-Javascript/sc.js" charset="utf-8"></script>
 <script>
-  let c = SFComponent['simple-carousel'];
-  c.defaultBind = {
+  let simpleCarousel = SFComponent['simple-carousel'];
+  simpleCarousel.defaultBind = {
     'loading': {
       'style': {
         'display': 'block'
       }
     }
   }
-  c.connectedCallback = function(e) {}
-  c.bindDataChangedCallback = function(e) {
+  console.log(simpleCarousel);
+  simpleCarousel.connectedCallback = function(e) {
+    console.log(e);
     let cards = e.shadowRoot.querySelectorAll("slot")[0].assignedNodes().filter(el => typeof el.tagName !== "undefined");
     SC.new(e.shadowRoot.querySelector('.cor'), {
       "cards": cards
