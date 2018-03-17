@@ -1,7 +1,7 @@
 <template relative-url="true">
   <link type="text/css" rel="stylesheet" href="../SF-Component/cor.min.css">
   <div class="cor">
-    <img class="loading" style="position: absolute; display: ${bind.loading.style.display}" src="./loading.gif" alt="loading">
+    <img class="loading" style="position: absolute; display: ${bind.loading.style.display};" src="./loading.gif" alt="loading">
     <slot class="scrollD"></slot>
     <div class="arrow l noselect">
       <img src="./down.svg" class="fit" alt="\/"/>
@@ -28,7 +28,6 @@
     }
   }
   simpleCarousel.connectedCallback = function(e) {
-    console.log(SC);
     SC.new(e.shadowRoot.querySelector('.cor'), {
       "cards": e.children
     });
