@@ -201,12 +201,12 @@ var SC = {
     }
   },
   makeActive: function(i, j) {
-    let l = SC.corscards[j].length;
+    let l = SC.corscards[j].length, x;
     removeExceptOne(SC.corscards[j], "active", i);
-    i = i == 0 ? i + l : i;
-    removeExceptOne(SC.corscards[j], "prev", i - 1);
-    i = i == l ? i - l : i;
-    removeExceptOne(SC.corscards[j], "next", i + 1);
+    x = i == 0 ? l : i;
+    removeExceptOne(SC.corscards[j], "prev", x - 1);
+    x = i == l - 1 ? -1 : i;
+    removeExceptOne(SC.corscards[j], "next", x + 1);
     if (SC.corscards[j][i] && !SC.corscards[j][i].getAttribute("src")) {
       SC.corscards[j][i].setAttribute("src", SC.corscards[j][i].getAttribute("data-src"));
     }
