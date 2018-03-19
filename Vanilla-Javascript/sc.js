@@ -152,19 +152,20 @@ class SC {
     this.ra.style.display = "none";
   }
   setClickHandlers(){
+    let me = this;
     if (this.la) {
       this.la.addEventListener('click', function() {
-        this.prev();
+        me.prev();
       }, ELopt);
     }
     if (this.ra) {
       this.ra.addEventListener('click', function() {
-        this.next();
+        me.next();
       }, ELopt);
     }
     if (this.fs) {
       this.fs.addEventListener('click', function() {
-        toggleClass(main, 'fullscreen');
+        toggleClass(me.main, 'fullscreen');
         toggleClass(document.body, 'noscroll');
         document.body.scrollTop = document.documentElement.scrollTop = 0;
       }, ELopt);
@@ -174,11 +175,11 @@ class SC {
     return this._active;
   }
   set active(i){
-    i = getCardNumber(i);
+    i = this.getCardNumber(i);
     this._active = i;
     removeExceptOne(this.cards, "active", i);
-    removeExceptOne(this.cards, "prev", getCardNumber(i - 1));
-    removeExceptOne(this.cards, "next", getCardNumber(i + 1));
+    removeExceptOne(this.cards, "prev", this.getCardNumber(i - 1));
+    removeExceptOne(this.cards, "next", this.getCardNumber(i + 1));
     if (this.cards[i] && !this.cards[i].getAttribute("src")) {
       this.cards[i].setAttribute("src", this.cards[i].getAttribute("data-src"));
     }
