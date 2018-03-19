@@ -115,7 +115,7 @@ Array.prototype.remove = function() {
 
 function removeExceptOne(elems, classN, index) {
   for (let j = 0; j < elems.length; j++) {
-    j !== index ? removeClass(elems[j], classN) : addClass(elems[j], classN);
+    j !== index && elems[j] !== index ? removeClass(elems[j], classN) : addClass(elems[j], classN);
   }
 }
 
@@ -185,8 +185,8 @@ class SC {
       this.cards[i].setAttribute("src", this.cards[i].getAttribute("data-src"));
     }
     this.setNumber(i);
-    if (this.hasNext()) this.ra.style.display = "block";
-    if (this.hasPrev()) this.la.style.display = "block";
+    this.la.style.display = this.hasPrev() ? "block" : "none";
+    this.ra.style.display = this.hasNext() ? "block" : "none";
   }
   getCardNumber(i){
     let l = this.totalCards;
@@ -199,7 +199,6 @@ class SC {
   }
   hasNext(){
     if (this.active == this.totalCards - 1 && !this.loop){
-      this.ra.style.display = "none";
       return false;
     }
     return true;
@@ -211,17 +210,16 @@ class SC {
   }
   hasPrev(){
     if (this.active == 0 && !this.loop){
-      this.la.style.display = "none";
       return false;
     }
     return true;
   }
   setNumber(i){
     if (this.num) {
-      if (this.num.childNodes.length == 1) {
-        this.num.innerHTML = i + 1 + "/" + l;
+      if (this.num.childNodes.length < 2) {
+        this.num.innerHTML = i + 1 + "/" + this.totalCards;
       } else {
-
+        removeExceptOne(this.num.childNodes, i, this.num.querySelector("[data-card-number="+i+"]"));
       }
     }
   }
