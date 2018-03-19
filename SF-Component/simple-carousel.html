@@ -63,7 +63,7 @@
     }
   }
   simpleCarousel.connectedCallback = function(e) {
-    SC.new(e.shadowRoot.querySelector('.cor'), {
+    a = new SC(e.shadowRoot.querySelector('.cor'), {
       "cards": e.children
     });
   }

@@ -35,11 +35,11 @@ function forEach(array, callback) {
     callback.call(array, array, 0);
   }
 };
-function siblings(elem, classN) {
+function siblings(elem, selector) {
   let r = [];
-  let childs = children(elem.parentElement, '*');
+  let childs = elem.parentElement.children;
   forEach(childs, function(child) {
-    if (child.matches(classN)) {
+    if (child.matches(selector)) {
       r.push(child);
     }
   });
@@ -56,14 +56,14 @@ function parent(x, k) {
   return false;
 }
 
-function children(elem, classN) {
+function children(elem, selector) {
   let c = elem.children;
   let r = [];
   if (!c) {
     return false;
   }
   for (let i = 0; i < c.length; i++) {
-    if (c[i].matches(classN)) {
+    if (c[i].matches(selector)) {
       r.push(c[i]);
     }
   }
@@ -86,9 +86,6 @@ function addClass(elem, classN) {
   }
   if (!elem) {
     return false;
-  }
-  if (elem.className.length < 1) {
-    elem.className = classN;
   }
   elem.classList.add(classN);
 }
@@ -118,108 +115,115 @@ Array.prototype.remove = function() {
 
 function removeExceptOne(elems, classN, index) {
   for (let j = 0; j < elems.length; j++) {
-    if (j !== index) {
-      removeClass(elems[j], classN);
-    } else {
-      addClass(elems[j], classN);
-    }
+    j !== index ? removeClass(elems[j], classN) : addClass(elems[j], classN);
   }
 }
 
-// carousel js
-function toggleFullScreenClass(element) {
-  let fsenabled = hasClass(element, "fullscreen");
-  if (fsenabled) {
-    removeClass(element, "fullscreen");
-    removeClass(document.body, "noscroll");
-  } else {
-    addClass(element, "fullscreen");
-    addClass(document.body, "noscroll");
-  }
-  document.body.scrollTop = document.documentElement.scrollTop = 0;
+function toggleClass(element, classN) {
+  hasClass(element, classN) ? removeClass(element, classN) : addClass(element, classN);
 }
-var SC = {
-  new: function(main, params) {
-    params = params || {};
-    let cards = params.cards || main.querySelectorAll(".scrollD img");
-    let ra = params.ra || main.querySelector(".r");
-    let la = params.la || main.querySelector(".l");
-    let fs = params.fs || main.querySelector(".fs");
-    let num = params.num || main.querySelector(".num");
-    let loading = main.querySelector(".loading");
-    let load = typeof params.showLoading === 'undefined' ? true : params.showLoading;
-    if (!load){
-      loading.style.display = "none";
+// carousel js
+class SC {
+  constructor(main, params = {}){
+    this.main = main;
+    const defaultParams = {
+      cards: main.querySelectorAll(".scrollD > *"),
+      ra: main.querySelector(".r"),
+      la: main.querySelector(".l"),
+      fs: main.querySelector(".fs"),
+      num: main.querySelector(".num"),
+      loading: main.querySelector(".loading"),
+      showLoading: true,
+      loop: false
     }
-    if (cards.length < 2 && ra && la) {
-      ra.style.display = "none";
-      la.style.display = "none";
+    Object.assign(this, defaultParams, params);
+    this.totalCards = this.cards.length;
+    if (!this.showLoading){
+      this.loading.style.display = "none";
     }
-    let l = cards.length;
-    let index = SC.cors.indexOf(main);
-    if (index > -1) {
-      SC.corsl[index] = l;
-      SC.corscards[index] = cards;
-      SC.makeActive(0, index);
-    } else {
-      let k = SC.cors.push(main);
-      index = SC.cors.indexOf(main);
-      SC.corsl[index] = l;
-      SC.corscards[index] = cards;
+    if (this.totalCards == 1){
+      this.hideArrows();
     }
-    SC.aI[index] = 0;
-    SC.makeActive(SC.aI[index], index);
-    if (ra) {
-      ra.addEventListener('click', function() {
-        l = SC.corsl[index];
-        SC.aI[index]++;
-        SC.aI[index] = SC.aI[index] % l;
-        SC.makeActive(SC.aI[index], index);
+    this.setClickHandlers();
+    this.active = 0;
+  }
+  hideArrows(){
+    this.la.style.display = "none";
+    this.ra.style.display = "none";
+  }
+  setClickHandlers(){
+    if (this.la) {
+      this.la.addEventListener('click', function() {
+        this.prev();
       }, ELopt);
-      SC.ra[index] = ra;
     }
-    if (la) {
-      la.addEventListener('click', function() {
-        l = SC.corsl[SC.cors.indexOf(main)];
-        SC.aI[index]--;
-        if (SC.aI[index] < 0) {
-          SC.aI[index] = SC.aI[index] + l;
-        }
-        SC.makeActive(SC.aI[index], index);
+    if (this.ra) {
+      this.ra.addEventListener('click', function() {
+        this.next();
       }, ELopt);
-      SC.la[index] = la;
     }
-    if (fs) {
-      fs.addEventListener('click', function() {
-        toggleFullScreenClass(main);
+    if (this.fs) {
+      this.fs.addEventListener('click', function() {
+        toggleClass(main, 'fullscreen');
+        toggleClass(document.body, 'noscroll');
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
       }, ELopt);
-      SC.fs[index] = fs;
     }
-    if (num) {
-      num.innerHTML = 1 + "/" + l;
-      SC.num[index] = num;
+  }
+  get active(){
+    return this._active;
+  }
+  set active(i){
+    i = getCardNumber(i);
+    this._active = i;
+    removeExceptOne(this.cards, "active", i);
+    removeExceptOne(this.cards, "prev", getCardNumber(i - 1));
+    removeExceptOne(this.cards, "next", getCardNumber(i + 1));
+    if (this.cards[i] && !this.cards[i].getAttribute("src")) {
+      this.cards[i].setAttribute("src", this.cards[i].getAttribute("data-src"));
     }
-  },
-  makeActive: function(i, j) {
-    let l = SC.corscards[j].length, x;
-    removeExceptOne(SC.corscards[j], "active", i);
-    x = i == 0 ? l : i;
-    removeExceptOne(SC.corscards[j], "prev", x - 1);
-    x = i == l - 1 ? -1 : i;
-    removeExceptOne(SC.corscards[j], "next", x + 1);
-    if (SC.corscards[j][i] && !SC.corscards[j][i].getAttribute("src")) {
-      SC.corscards[j][i].setAttribute("src", SC.corscards[j][i].getAttribute("data-src"));
+    setNumber(i);
+  }
+  getCardNumber(i){
+    let l = this.totalCards;
+    return i < 0 ? i + l : i % l;
+  }
+  next(){
+    if (this.hasNext()) {
+      this.active = this._active + 1;
     }
-    if (SC.num[j]) {
-      SC.num[j].innerHTML = i + 1 + "/" + l;
+  }
+  hasNext(){
+    if (this.active == this.totalCards - 1 && !this.loop){
+      this.ra.style.display = "none";
+      return false;
     }
-  },
-  cors: [],
-  corsl: [],
-  corscards: [],
-  ra: [],
-  la: [],
-  fs: [],
-  aI: [],
-  num: []
+    this.ra.style.display = "block";
+    return true;
+  }
+  prev(){
+    if (this.hasPrev()) {
+      this.active = this._active - 1;
+    }
+  }
+  hasPrev(){
+    if (this.active == 0 && !this.loop){
+      this.la.style.display = "none";
+      return false;
+    }
+    this.la.style.display = "block";
+    return true;
+  }
+  setNumber(i){
+    if (this.num) {
+      if (this.num.childNodes.length == 1) {
+        this.num.innerHTML = i + 1 + "/" + l;
+      } else {
+
+      }
+    }
+  }
+  static new(main, params = {}){
+    return new SC(main, params);
+  }
 }
