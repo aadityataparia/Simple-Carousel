@@ -146,6 +146,7 @@ class SC {
     }
     this.setClickHandlers();
     this.active = 0;
+    SC.addSC(this);
   }
   hideArrows(){
     this.la.style.display = "none";
@@ -226,5 +227,12 @@ class SC {
   }
   static new(main, params = {}){
     return new SC(main, params);
+  }
+  static all(){
+    return this.scs;
+  }
+  static addSC(i){
+    this.scs = this.scs || [];
+    this.scs.push(i);
   }
 }
