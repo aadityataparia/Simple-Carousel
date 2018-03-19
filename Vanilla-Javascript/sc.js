@@ -219,7 +219,7 @@ class SC {
       if (this.num.childNodes.length < 2) {
         this.num.innerHTML = i + 1 + "/" + this.totalCards;
       } else {
-        removeExceptOne(this.num.childNodes, i, this.num.querySelector("[data-card-number="+i+"]"));
+        removeExceptOne(this.num.childNodes, i, this.num.querySelector("[data-card="+i+"]"));
       }
     }
   }
