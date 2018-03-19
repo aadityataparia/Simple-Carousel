@@ -183,7 +183,9 @@ class SC {
     if (this.cards[i] && !this.cards[i].getAttribute("src")) {
       this.cards[i].setAttribute("src", this.cards[i].getAttribute("data-src"));
     }
-    setNumber(i);
+    this.setNumber(i);
+    if (this.hasNext()) this.ra.style.display = "block";
+    if (this.hasPrev()) this.la.style.display = "block";
   }
   getCardNumber(i){
     let l = this.totalCards;
@@ -199,7 +201,6 @@ class SC {
       this.ra.style.display = "none";
       return false;
     }
-    this.ra.style.display = "block";
     return true;
   }
   prev(){
@@ -212,7 +213,6 @@ class SC {
       this.la.style.display = "none";
       return false;
     }
-    this.la.style.display = "block";
     return true;
   }
   setNumber(i){
