@@ -219,7 +219,8 @@ class SC {
       if (this.num.childNodes.length < 2) {
         this.num.innerHTML = i + 1 + "/" + this.totalCards;
       } else {
-        removeExceptOne(this.num.childNodes, i, this.num.querySelector("[data-card="+i+"]"));
+        const x = i + 1;
+        removeExceptOne(this.num.children, "active", this.num.querySelector('[data-card="' + x + '"]'));
       }
     }
   }
