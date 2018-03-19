@@ -24,7 +24,10 @@ body.noscroll {
     position: absolute;
     z-index: 30;
     right: 0;
+    left: 0;
     bottom: 0;
+    text-align: center;
+    padding: 10px;
 
     > * {
       display: inline-block;
@@ -54,11 +57,7 @@ body.noscroll {
   }
 
   .num {
-    position: absolute;
     padding: 4px;
-    margin: 4px;
-    right: 0;
-    bottom: 0;
     font-size: 12px;
     background-color: rgba(#fff,0.7);
     border-radius: 100px;
