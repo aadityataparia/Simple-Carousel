@@ -17,6 +17,7 @@ if (SUPPORT_PASSIVE) {
 } else {
 var ELopt = false;
 }
+
 function forEach(array, callback) {
   if (typeof array == 'object' && array != null && array) {
     for (let key in array) {
@@ -34,93 +35,16 @@ function forEach(array, callback) {
   } else {
     callback.call(array, array, 0);
   }
-};
-function siblings(elem, selector) {
-  let r = [];
-  let childs = elem.parentElement.children;
-  forEach(childs, function(child) {
-    if (child.matches(selector)) {
-      r.push(child);
-    }
-  });
-  return r;
 }
-
-function parent(x, k) {
-  while (x) {
-    if (x.matches(k)) {
-      return x;
-    }
-    x = x.parentElement;
-  }
-  return false;
-}
-
-function children(elem, selector) {
-  let c = elem.children;
-  let r = [];
-  if (!c) {
-    return false;
-  }
-  for (let i = 0; i < c.length; i++) {
-    if (c[i].matches(selector)) {
-      r.push(c[i]);
-    }
-  }
-  return r;
-}
-
-function hasClass(elem, classN) {
-  if (typeof elem == "string") {
-    elem = document.querySelector(elem);
-  }
-  if (!elem) {
-    return false;
-  }
-  return elem.classList.contains(classN);
-}
-
-function addClass(elem, classN) {
-  if (typeof elem == "string") {
-    elem = document.querySelector(elem);
-  }
-  if (!elem) {
-    return false;
-  }
-  elem.classList.add(classN);
-}
-
-function removeClass(elem, classN) {
-  if (typeof elem == "string") {
-    elem = document.querySelector(elem);
-  }
-  if (!elem) {
-    return false;
-  }
-  elem.classList.remove(classN);
-}
-
-Array.prototype.remove = function() {
-  let what, a = arguments,
-    L = a.length,
-    ax;
-  while (L && this.length) {
-    what = a[--L];
-    while ((ax = this.indexOf(what)) !== -1) {
-      this.splice(ax, 1);
-    }
-  }
-  return this;
-};
 
 function removeExceptOne(elems, classN, index) {
   for (let j = 0; j < elems.length; j++) {
-    j !== index && elems[j] !== index ? removeClass(elems[j], classN) : addClass(elems[j], classN);
+    j !== index && elems[j] !== index ? elems[j].classList.remove(classN) : elems[j].classList.add(classN);
   }
 }
 
 function toggleClass(element, classN) {
-  hasClass(element, classN) ? removeClass(element, classN) : addClass(element, classN);
+  element.classList.contains(classN) ? element.classList.remove(classN) : element.classList.add(classN);
 }
 // carousel js
 class SC {
