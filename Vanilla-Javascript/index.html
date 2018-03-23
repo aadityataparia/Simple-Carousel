@@ -15,6 +15,23 @@
     #second .scrollD p {
       background-color: white;
     }
+
+    #second .num {
+      background-color: transparent;
+    }
+
+    .carddot {
+      display: inline-block;
+      height: 6px;
+      width: 6px;
+      border-radius: 3px;
+      opacity: 0.3;
+      background-color: white;
+    }
+
+    .carddot.active {
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -61,7 +78,11 @@
         <div class="fs right">
           <img src="./fs.svg" alt="FS" />
         </div>
-        <div class="num"></div>
+        <div class="num">
+          <div class="carddot" data-card=1></div>
+          <div class="carddot" data-card=2></div>
+          <div class="carddot" data-card=3></div>
+        </div>
       </div>
     </div>
   </div>
@@ -69,9 +90,7 @@
   <script type="text/javascript">
     // create carousel for all .cor
     SC.new(document.querySelector("#first"));
-    SC.new(document.querySelector("#second"), {
-      "cards": document.querySelectorAll('#second .scrollD p')
-    });
+    SC.new(document.querySelector("#second"));
   </script>
 </body>
 

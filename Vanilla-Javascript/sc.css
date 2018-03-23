@@ -11,6 +11,10 @@ body.noscroll {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+.cor * {
+  transition: all 0.5s ease;
+}
+
 .cor.fullscreen {
   position: absolute;
   top: 0;
@@ -24,7 +28,14 @@ body.noscroll {
   position: absolute;
   z-index: 30;
   right: 0;
+  left: 0;
   bottom: 0;
+  text-align: center;
+  padding: 10px;
+}
+
+.cor .br > * {
+  display: inline-block;
 }
 
 .cor .loading {
@@ -36,23 +47,17 @@ body.noscroll {
 }
 
 .cor .fs {
-  padding: 5px 5px 25px;
-  margin: 7px 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
   width: 25px;
   height: 25px;
-  opacity: 0.5;
-}
-
-.cor .fs:hover {
-  opacity: 1;
 }
 
 .cor .num {
-  position: absolute;
   padding: 4px;
-  margin: 4px;
-  right: 0;
-  bottom: 0;
   font-size: 12px;
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 100px;
@@ -61,16 +66,12 @@ body.noscroll {
 }
 
 .cor .arrow {
+  opacity: 0;
   position: absolute;
   z-index: 5;
   top: 0;
   bottom: 0;
   width: 20%;
-  opacity: 0.5;
-}
-
-.cor .arrow:hover {
-  opacity: 1;
 }
 
 .cor .arrow > * {
@@ -86,7 +87,6 @@ body.noscroll {
 
 .cor .arrow.l img {
   left: 0;
-  -webkit-transform: translateY(-50%) rotate(90deg);
   transform: translateY(-50%) rotate(90deg);
 }
 
@@ -132,3 +132,15 @@ body.noscroll {
   opacity: 1;
   z-index: 1;
 }
+
+.cor:hover .arrow,
+.cor:hover .fs {
+  opacity: 0.6;
+}
+
+.cor:hover .arrow:hover,
+.cor:hover .fs:hover {
+  opacity: 1;
+}
+
+/*# sourceMappingURL=sc.css.map */
