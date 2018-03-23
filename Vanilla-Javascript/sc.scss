@@ -25,7 +25,6 @@ body.noscroll {
   }
 
   .br {
-    opacity: 0;
     position: absolute;
     z-index: 30;
     right: 0;
@@ -48,6 +47,7 @@ body.noscroll {
   }
 
   .fs {
+    opacity: 0;
     position: absolute;
     right: 0;
     bottom: 0;
@@ -136,7 +136,7 @@ body.noscroll {
 
 .cor:hover {
   .arrow,
-  .br {
+  .fs {
     opacity: 0.6;
 
     &:hover {
