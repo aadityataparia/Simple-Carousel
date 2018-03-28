@@ -46,6 +46,10 @@ body.noscroll {
     margin: -5%;
   }
 
+  img {
+    filter: drop-shadow(-1px -1px 3px #000);
+  }
+
   .fs {
     opacity: 0;
     position: absolute;
@@ -94,7 +98,6 @@ body.noscroll {
 
       img {
         right: 0;
-        -webkit-transform: translateY(-50%) rotate(-90deg);
         transform: translateY(-50%) rotate(-90deg);
       }
     }

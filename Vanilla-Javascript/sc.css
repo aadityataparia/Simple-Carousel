@@ -46,6 +46,10 @@ body.noscroll {
   margin: -5%;
 }
 
+.cor img {
+  filter: drop-shadow(-1px -1px 3px #000);
+}
+
 .cor .fs {
   opacity: 0;
   position: absolute;
@@ -96,7 +100,6 @@ body.noscroll {
 
 .cor .arrow.r img {
   right: 0;
-  -webkit-transform: translateY(-50%) rotate(-90deg);
   transform: translateY(-50%) rotate(-90deg);
 }
 
