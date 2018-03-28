@@ -58,19 +58,26 @@ class SC {
       num: main.querySelector(".num"),
       loading: main.querySelector(".loading"),
       showLoading: true,
-      loop: false
+      loop: false,
+      image_size: 'contain'
     }
-    Object.assign(this, defaultParams, params);
+    Object.assign(defaultParams, params);
+    this.refresh(defaultParams);
+    this.setClickHandlers();
+    SC.addSC(this);
+  }
+  refresh(params = {}){
+    Object.assign(this, params);
+    let main = this.main;
     this.totalCards = this.cards.length;
+    Array.from(this.cards).forEach(i => i.style.objectFit = this.image_size);
     if (!this.showLoading){
       this.loading.style.display = "none";
     }
     if (this.totalCards == 1){
       this.hideArrows();
     }
-    this.setClickHandlers();
     this.active = 0;
-    SC.addSC(this);
   }
   hideArrows(){
     this.la.style.display = "none";
