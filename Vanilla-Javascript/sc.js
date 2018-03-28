@@ -18,25 +18,6 @@ if (SUPPORT_PASSIVE) {
 var ELopt = false;
 }
 
-function forEach(array, callback) {
-  if (typeof array == 'object' && array != null && array) {
-    for (let key in array) {
-      if (array.hasOwnProperty(key) && array[key] && key != "length") {
-        callback.call(array[key], array[key], key);
-      }
-    }
-  } else if(Array.isArray(array)) {
-    if (array.length < 1) {
-      return false;
-    }
-    for (let i = 0; i < array.length; i++) {
-      callback.call(array[i], array[i], i);
-    }
-  } else {
-    callback.call(array, array, 0);
-  }
-}
-
 function removeExceptOne(elems, classN, index) {
   for (let j = 0; j < elems.length; j++) {
     j !== index && elems[j] !== index ? elems[j].classList.remove(classN) : elems[j].classList.add(classN);
