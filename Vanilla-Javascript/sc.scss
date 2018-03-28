@@ -121,7 +121,7 @@ body.noscroll {
       opacity: 0;
       margin: 0;
       transform: translate3d(-50%, -50%, 0);
-      transition: transform 0.15s $custom-easing, opacity 0.15s $custom-easing;
+      transition: transform 0.4s $custom-easing, opacity 0.4s $custom-easing;
 
       &.prev {
         transform: translate3d(-60%, -50%, 0);

@@ -32,7 +32,7 @@ class SC {
   constructor(main, params = {}){
     this.main = main;
     const defaultParams = {
-      cards: main.querySelectorAll(".scrollD > *"),
+      cards: main.querySelector(".scrollD").children,
       ra: main.querySelector(".r"),
       la: main.querySelector(".l"),
       fs: main.querySelector(".fs"),
@@ -58,7 +58,7 @@ class SC {
     if (this.totalCards == 1){
       this.hideArrows();
     }
-    this.active = 0;
+    this.active = this.active || 0;
   }
   hideArrows(){
     this.la.style.display = "none";
