@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no">
   <meta charset="utf-8">
   <title>Simple-Carousel</title>
-  <link rel="stylesheet" href="./sc.css">
+  <link rel="stylesheet" href="./Vanilla-Javascript/sc.css">
   <style media="screen">
     .container {
       width: 300px;
@@ -39,7 +39,7 @@
   <h2>Simple-Carousel Example</h2>
   <div class="container">
     <div class="cor" id="first">
-      <img class="loading" style="position: absolute" src="./loading.gif" alt="loading">
+      <img class="loading" style="position: absolute" src="./Vanilla-Javascript/loading.gif" alt="loading">
       <div class="scrollD">
         <!-- insert imgs here -->
         <img data-src="https://tuneout.aadityataparia.com/s3/img/locations/1/2d/0.jpg" src="https://tuneout.aadityataparia.com/s3/img/locations/1/2d/0.jpg">
@@ -47,14 +47,14 @@
         <img data-src="https://tuneout.aadityataparia.com/s3/img/locations/1/2d/2.jpg">
       </div>
       <div class="arrow l noselect">
-        <img src="./down.svg" class="fit" alt="\/" />
+        <img src="./Vanilla-Javascript/down.svg" class="fit" alt="\/" />
       </div>
       <div class="arrow r noselect">
-        <img src="./down.svg" class="fit" alt="\/" />
+        <img src="./Vanilla-Javascript/down.svg" class="fit" alt="\/" />
       </div>
       <div class="br">
         <div class="fs right">
-          <img src="./fs.svg" alt="FS" />
+          <img src="./Vanilla-Javascript/fs.svg" alt="FS" />
         </div>
         <div class="num"></div>
       </div>
@@ -69,14 +69,14 @@
         <p>Three slide</p>
       </div>
       <div class="arrow l noselect">
-        <img src="./down.svg" class="fit" alt="\/" />
+        <img src="./Vanilla-Javascript/down.svg" class="fit" alt="\/" />
       </div>
       <div class="arrow r noselect">
-        <img src="./down.svg" class="fit" alt="\/" />
+        <img src="./Vanilla-Javascript/down.svg" class="fit" alt="\/" />
       </div>
       <div class="br">
         <div class="fs right">
-          <img src="./fs.svg" alt="FS" />
+          <img src="./Vanilla-Javascript/fs.svg" alt="FS" />
         </div>
         <div class="num">
           <div class="carddot" data-card=1></div>
@@ -86,11 +86,11 @@
       </div>
     </div>
   </div>
-  <script src="./sc.js" charset="utf-8"></script>
+  <script src="./Vanilla-Javascript/sc.js" charset="utf-8"></script>
   <script type="text/javascript">
     // create carousel for all .cor
-    SC.new(document.querySelector("#first"));
-    SC.new(document.querySelector("#second"));
+    let sc1 = new SC(document.querySelector("#first"));
+    let sc2 = new SC(document.querySelector("#second"));
   </script>
 </body>
 

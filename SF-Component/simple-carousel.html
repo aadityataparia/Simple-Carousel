@@ -36,7 +36,7 @@
   }
   </style>
   <div class="cor">
-    <img class="loading" style="position: absolute; display: ${bind.loading.style.display};" src="../Vanilla-Javascript/loading.gif" alt="loading">
+    <img class="loading" style="position: absolute; display: ${loading.style.display};" src="../Vanilla-Javascript/loading.gif" alt="loading">
     <slot class="scrollD"></slot>
     <div class="arrow l noselect">
       <img src="../Vanilla-Javascript/down.svg" class="fit" alt="\/"/>
@@ -55,7 +55,7 @@
 <script src="../Vanilla-Javascript/sc.js" charset="utf-8"></script>
 <script>
   const simpleCarousel = SFComponent['simple-carousel'];
-  simpleCarousel.defaultBind = {
+  simpleCarousel.defaultState = {
     'loading': {
       'style': {
         'display': 'block'

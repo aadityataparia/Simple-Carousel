@@ -18,25 +18,6 @@ if (SUPPORT_PASSIVE) {
 var ELopt = false;
 }
 
-function forEach(array, callback) {
-  if (typeof array == 'object' && array != null && array) {
-    for (let key in array) {
-      if (array.hasOwnProperty(key) && array[key] && key != "length") {
-        callback.call(array[key], array[key], key);
-      }
-    }
-  } else if(Array.isArray(array)) {
-    if (array.length < 1) {
-      return false;
-    }
-    for (let i = 0; i < array.length; i++) {
-      callback.call(array[i], array[i], i);
-    }
-  } else {
-    callback.call(array, array, 0);
-  }
-}
-
 function removeExceptOne(elems, classN, index) {
   for (let j = 0; j < elems.length; j++) {
     j !== index && elems[j] !== index ? elems[j].classList.remove(classN) : elems[j].classList.add(classN);
@@ -51,26 +32,33 @@ class SC {
   constructor(main, params = {}){
     this.main = main;
     const defaultParams = {
-      cards: main.querySelectorAll(".scrollD > *"),
+      cards: main.querySelector(".scrollD").children,
       ra: main.querySelector(".r"),
       la: main.querySelector(".l"),
       fs: main.querySelector(".fs"),
       num: main.querySelector(".num"),
       loading: main.querySelector(".loading"),
       showLoading: true,
-      loop: false
+      loop: false,
+      image_size: 'contain'
     }
-    Object.assign(this, defaultParams, params);
+    Object.assign(defaultParams, params);
+    this.refresh(defaultParams);
+    this.setClickHandlers();
+    SC.addSC(this);
+  }
+  refresh(params = {}){
+    Object.assign(this, params);
+    let main = this.main;
     this.totalCards = this.cards.length;
+    Array.from(this.cards).forEach(i => i.style.objectFit = this.image_size);
     if (!this.showLoading){
       this.loading.style.display = "none";
     }
     if (this.totalCards == 1){
       this.hideArrows();
     }
-    this.setClickHandlers();
-    this.active = 0;
-    SC.addSC(this);
+    this.active = this.active || 0;
   }
   hideArrows(){
     this.la.style.display = "none";
