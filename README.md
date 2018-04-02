@@ -11,6 +11,6 @@ Simple carousel in pure vanilla javascript/web component/SF-component
 - Images can be replaced with other html elements (to make slide)
 
 ## Example
-Go to: https://www.aadityataparia.com/carousel/Vanilla-Javascript/
+Go to: https://www.aadityataparia.com/carousel/
 
 ![eg](https://raw.githubusercontent.com/aadityataparia/Simple-Carousel/master/example.png)
