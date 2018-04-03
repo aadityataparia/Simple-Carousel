@@ -1,21 +1,23 @@
 // Polyfills
-var SUPPORT_PASSIVE = false;
-try {
-  let opts = Object.defineProperty({}, 'passive', {
-    get: function() {
-      SUPPORT_PASSIVE = true;
-    }
-  });
-  window.addEventListener("test", null, opts);
-} catch (e) {}
+if (typeof SUPPORT_PASSIVE == 'undefined'){
+  var SUPPORT_PASSIVE = false;
+  try {
+    let opts = Object.defineProperty({}, 'passive', {
+      get: function() {
+        SUPPORT_PASSIVE = true;
+      }
+    });
+    window.addEventListener("test", null, opts);
+  } catch (e) {}
 
-if (SUPPORT_PASSIVE) {
-  var ELopt = {
-    passive: true,
-    capture: false
+  if (SUPPORT_PASSIVE) {
+    var ELopt = {
+      passive: true,
+      capture: false
+    }
+  } else {
+  var ELopt = false;
   }
-} else {
-var ELopt = false;
 }
 
 function removeExceptOne(elems, classN, index) {
@@ -43,13 +45,12 @@ class SC {
       image_size: 'contain'
     }
     Object.assign(defaultParams, params);
-    this.refresh(defaultParams);
     this.setClickHandlers();
+    this.refresh(defaultParams);
     SC.addSC(this);
   }
   refresh(params = {}){
     Object.assign(this, params);
-    let main = this.main;
     this.totalCards = this.cards.length;
     Array.from(this.cards).forEach(i => i.style.objectFit = this.image_size);
     if (!this.showLoading){
@@ -58,7 +59,7 @@ class SC {
     if (this.totalCards == 1){
       this.hideArrows();
     }
-    this.active = this.active || 0;
+    this.active = params.active || this.active || 0;
   }
   hideArrows(){
     this.la.style.display = "none";
