@@ -49,7 +49,6 @@ class SC {
   }
   refresh(params = {}){
     Object.assign(this, params);
-    let main = this.main;
     this.totalCards = this.cards.length;
     Array.from(this.cards).forEach(i => i.style.objectFit = this.image_size);
     if (!this.showLoading){
@@ -58,7 +57,7 @@ class SC {
     if (this.totalCards == 1){
       this.hideArrows();
     }
-    this.active = this.active || 0;
+    this.active = params.active || this.active || 0;
   }
   hideArrows(){
     this.la.style.display = "none";
