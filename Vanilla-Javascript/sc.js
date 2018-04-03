@@ -45,8 +45,8 @@ class SC {
       image_size: 'contain'
     }
     Object.assign(defaultParams, params);
-    this.refresh(defaultParams);
     this.setClickHandlers();
+    this.refresh(defaultParams);
     SC.addSC(this);
   }
   refresh(params = {}){
