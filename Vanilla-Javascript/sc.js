@@ -1,22 +1,8 @@
 // Polyfills
-if (typeof SUPPORT_PASSIVE == 'undefined'){
-  var SUPPORT_PASSIVE = false;
-  try {
-    let opts = Object.defineProperty({}, 'passive', {
-      get: function() {
-        SUPPORT_PASSIVE = true;
-      }
-    });
-    window.addEventListener("test", null, opts);
-  } catch (e) {}
-
-  if (SUPPORT_PASSIVE) {
-    var ELopt = {
-      passive: true,
-      capture: false
-    }
-  } else {
-  var ELopt = false;
+if (typeof Elopt == 'undefined'){
+  var ELopt = {
+    passive: true,
+    capture: false
   }
 }
 
@@ -45,8 +31,8 @@ class SC {
       image_size: 'contain'
     }
     Object.assign(defaultParams, params);
-    this.setClickHandlers();
     this.refresh(defaultParams);
+    this.setClickHandlers();
     SC.addSC(this);
   }
   refresh(params = {}){
