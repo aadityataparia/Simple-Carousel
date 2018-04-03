@@ -1,21 +1,23 @@
 // Polyfills
-var SUPPORT_PASSIVE = false;
-try {
-  let opts = Object.defineProperty({}, 'passive', {
-    get: function() {
-      SUPPORT_PASSIVE = true;
-    }
-  });
-  window.addEventListener("test", null, opts);
-} catch (e) {}
+if (typeof SUPPORT_PASSIVE == 'undefined'){
+  var SUPPORT_PASSIVE = false;
+  try {
+    let opts = Object.defineProperty({}, 'passive', {
+      get: function() {
+        SUPPORT_PASSIVE = true;
+      }
+    });
+    window.addEventListener("test", null, opts);
+  } catch (e) {}
 
-if (SUPPORT_PASSIVE) {
-  var ELopt = {
-    passive: true,
-    capture: false
+  if (SUPPORT_PASSIVE) {
+    var ELopt = {
+      passive: true,
+      capture: false
+    }
+  } else {
+  var ELopt = false;
   }
-} else {
-var ELopt = false;
 }
 
 function removeExceptOne(elems, classN, index) {
