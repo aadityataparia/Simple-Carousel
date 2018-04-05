@@ -70,6 +70,12 @@ class SC {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
       }, ELopt);
     }
+    let observer = new MutationObserver(function(mutations) {
+    	mutations.forEach(function(mutation) {
+    		me.refresh();
+    	});
+    });
+    observer.observe(me.cards.item(0).parentElement, {childList: true});
   }
   get active(){
     return this._active;
