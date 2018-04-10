@@ -1,4 +1,4 @@
-<template relative-url="true">
+<template relative-url="true" state="false">
   <link type="text/css" rel="stylesheet" href="../Vanilla-Javascript/sc.min.css">
   <style media="screen">
   :host {
@@ -37,7 +37,7 @@
   }
   </style>
   <div class="cor">
-    <img class="loading" style="position: absolute; display: ${loading.style.display};" src="../Vanilla-Javascript/loading.gif" alt="loading">
+    <img class="loading" style="position: absolute;" src="../Vanilla-Javascript/loading.gif" alt="loading">
     <slot class="scrollD"></slot>
     <div class="arrow l noselect">
       <img src="../Vanilla-Javascript/down.svg" class="fit" alt="\/"/>
@@ -56,16 +56,11 @@
 <script src="../Vanilla-Javascript/sc.js" charset="utf-8"></script>
 <script>
   const simpleCarousel = SFComponent['simple-carousel'];
-  simpleCarousel.defaultState = {
-    'loading': {
-      'style': {
-        'display': 'block'
-      }
-    }
-  }
   simpleCarousel.connectedCallback = function(e) {
-    a = new SC(e.shadowRoot.querySelector('.cor'), {
+    let options = {
       "cards": e.children
-    });
+    }
+    if (e.getAttribute('options')) Object.assign(options, tryParseJSON(e.getAttribute('options')));
+    a = new SC(e.shadowRoot.querySelector('.cor'), options);
   }
 </script>
