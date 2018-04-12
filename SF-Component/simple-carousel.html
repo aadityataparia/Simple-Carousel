@@ -62,5 +62,8 @@
     }
     if (e.getAttribute('options')) Object.assign(options, tryParseJSON(e.getAttribute('options')));
     a = new SC(e.shadowRoot.querySelector('.cor'), options);
+    e.addEventListener('slotchange', function(event) {
+      a.refresh();
+    });
   }
 </script>
